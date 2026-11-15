@@ -1,0 +1,32 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+test-results/
+playwright-report/
+
+# OS / editors
+.DS_Store
+.idea/
+
+# local build output
+build-log.txt
+diag-log.txt
+env-log.txt
+setup-log.txt
+npm-log.txt
+
+# Machine-specific Windows helpers (kept locally, not part of the project)
+build-and-test.cmd
+diagnose.cmd
+env-check.cmd
+open-in-vscode.cmd
+reset-postgres-password.cmd
+reset-postgres-password.ps1
