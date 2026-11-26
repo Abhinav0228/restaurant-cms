@@ -1,0 +1,51 @@
+### Restaurant CMS API (REST Client extension: click "Send Request")
+@api = http://localhost:5080/api/v1
+@tenant = ember-oak
+
+### Sign in as restaurant staff (copy the token into @token below)
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{ "email": "admin@restaurant.local", "password": "ChangeMe!123" }
+
+###
+@token = paste-token-here
+
+### Guest site: menu of one restaurant (no sign-in)
+GET {{api}}/public/{{tenant}}/menu
+
+### Guest: table info behind a QR code
+GET {{api}}/public/{{tenant}}/tables/T2
+
+### Floor plan with live visit info
+GET {{api}}/tables
+Authorization: Bearer {{token}}
+
+### Open orders, first page
+GET {{api}}/orders?activeOnly=true&page=1&pageSize=50
+Authorization: Bearer {{token}}
+
+### Today's dashboard
+GET {{api}}/dashboard
+Authorization: Bearer {{token}}
+
+### ---------- Platform (sign in as platform@restaurant.local) ----------
+@platformToken = paste-platform-token-here
+
+### All restaurants
+GET {{api}}/platform/tenants
+Authorization: Bearer {{platformToken}}
+
+### Onboard a restaurant
+POST {{api}}/platform/tenants
+Authorization: Bearer {{platformToken}}
+Content-Type: application/json
+
+{
+  "slug": "blue-door", "name": "Blue Door Café", "plan": "Starter",
+  "ownerEmail": "owner@bluedoor.test", "ownerName": "Kabir", "ownerPassword": "ChangeMe!123",
+  "timeZoneId": "Asia/Kolkata", "currency": "INR", "withSampleData": true
+}
+
+### Health
+GET http://localhost:5080/health
